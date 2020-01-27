@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { render } from '@testing-library/react';
+import renderer from 'react-test-renderer';
+import WWCPlayers from './Components/WWCplayers';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -13,18 +15,24 @@ test('renders without crashing', () => {
   render(<App />);
 })
 
-test('contains balls in display', () => {
+test('contains WWC Players in display', () => {
 
   const container = render(<App />);
   const getByText = container.getByText;
 
-  getByText(/balls/i);
+  getByText(/wwc players/i);
 });
 
-test('contains strikes in display', () => {
 
-  const container = render(<App />);
-  const getByText = container.getByText;
+test('matches the snapshot', () => {
+  const tree = renderer.create(<WWCPlayers />).toJSON()
 
-  getByText(/strikes/i);
+  expect(tree).toMatchSnapshot()
 });
+
+
+// test("all players", () => {
+//   const { getByTestId } = render(<WWCPlayers />);
+
+//   getByTestId("allPlayers");
+// });
