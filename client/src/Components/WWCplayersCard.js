@@ -11,7 +11,6 @@ const PlayerCard = props => {
             </Card>
         </div>
     )
-
 }
 
 export default PlayerCard;
