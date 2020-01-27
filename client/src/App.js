@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 import PlayerCard from './Components/WWCplayersCard';
+import WWCplayers from './Components/WWCplayers';
 
 class App extends React.Component {
 
@@ -13,34 +14,25 @@ class App extends React.Component {
     super();
     this.state = {
       players: []
-      // name: '',
-      // country: '',
-      // searches: '',
-      // id: ''
-
     }
   }
-
 
   componentDidMount() {
     axios
       .get(`http://localhost:5000/api/players`)
       .then(res => {
-
         this.setState({ ...this.state, players: res.data })
-
       })
       .catch(err => console.log(err))
   }
-
-
 
 
   render() {
     return (
       <div className="App" >
         <div className='wwc_players'>
-          {/* <FilterPlayers props={this.state.playersList} /> */}
+          {/* <FilterPlayers props={this.state.players} /> */}
+          <WWCplayers players={this.state.players} />
           <h1> WWC Players:</h1 >
           {this.state.players.map(player => (
             < PlayerCard player={player} />
@@ -50,6 +42,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default App;
